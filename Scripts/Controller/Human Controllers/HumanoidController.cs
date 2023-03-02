@@ -17,6 +17,7 @@ public class HumanoidController : ThirdPersonController
     float currentAngle;
     int layerMask = 1 << 9;
     bool isClimbing;
+    Vector3 moveDir;
 
     private void OnEnable()
     {
@@ -50,6 +51,7 @@ public class HumanoidController : ThirdPersonController
         else if (isJumpPressed && isgrounded && !isobstacle)
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -1 * gravityValue);
+            Debug.Log("Jump");
 
         }
     }
@@ -62,7 +64,7 @@ public class HumanoidController : ThirdPersonController
         Debug.DrawRay(rightFeet.transform.position, Vector3.down * DistToGround);
         isgrounded = Physics.Raycast(landingRay, out hit, DistToGround);
 
-        if (Physics.Raycast(landingRay, out hit, DistToGround,~layerMask) || Physics.Raycast(landingRay2, out hit, DistToGround,~layerMask) || controller.isGrounded)
+        if (Physics.Raycast(landingRay, out hit, DistToGround,~layerMask) || Physics.Raycast(landingRay2, out hit, DistToGround,~layerMask) /*|| controller.isGrounded*/)
         {
             isgrounded = true;
         }
@@ -124,7 +126,7 @@ public class HumanoidController : ThirdPersonController
     protected override void Walk() // includes combat walk
     {
         CameraCalculations(out float targetAngle, out float angle);
-        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward * speed;
+        moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward * speed;
         if (GetComponent<InputController>().isCombatMode && !isClimbing)
         {          
             if (isSecondaryAttack)
@@ -162,7 +164,7 @@ public class HumanoidController : ThirdPersonController
             oldAngle = angle;
             if (!isobstacle)
             {
-                controller.Move(moveDir.normalized * speed * speedModifier * Time.deltaTime);
+                controller.Move(AdjustedVelocityToSlope(moveDir.normalized * speed) * speedModifier * Time.deltaTime);
             }
             else if (isobstacle)
             {
@@ -194,7 +196,20 @@ public class HumanoidController : ThirdPersonController
             gravityValue = -9.81f;
         }
     }
+    private Vector3 AdjustedVelocityToSlope(Vector3 velocity)
+    {
 
+        if (isgrounded)
+        {
+            var slopeRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            var adjustedVelocity = slopeRotation * moveDir.normalized * speed;
+            if (adjustedVelocity.y < 0)
+            {
+                return adjustedVelocity;
+            }
+        }
+        return moveDir.normalized * speed;
+    }
     private void Stamina()
     {
         if(isMoving && isModified)
