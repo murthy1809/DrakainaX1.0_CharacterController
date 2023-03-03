@@ -33,6 +33,8 @@ MonoBehaviour:
   ObstacleDetect: 2
   IsHoverMode: 0
   IsFlying: 0
+  IsAction: 0
+  IsClimbing: 0
   IsPrimaryAttack: 2
   IsSecondaryAttack: 2
   IsCombatMode: 0

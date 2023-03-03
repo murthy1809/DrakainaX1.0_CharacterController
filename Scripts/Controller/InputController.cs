@@ -184,6 +184,7 @@ public class InputController : MonoBehaviour
     private void HumanMovement(Vector3 direction)
     {
         Moving(direction);
+
         if (Input.GetButtonDown("Jump") && onGround)
         {
             isJumpPressed = true;
