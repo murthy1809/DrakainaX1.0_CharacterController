@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FIMSpace.FSpine;
+using UnityEngine.ProBuilder;
 
 //TODO Fix jumping problem with land and dive animations
 //TODO Align controller when Land
@@ -91,16 +92,8 @@ public class DragonController : ThirdPersonController
 
         rbodyVelocity = GetComponent<Rigidbody>().velocity;
 
-        //RaycastHit hit2;
-        //Ray landingRay5 = new Ray(controller.transform.position, Vector3.down);
-        //Debug.DrawRay(controller.transform.position, Vector3.down * 10, Color.blue);
-        //if (Physics.Raycast(landingRay5, out hit2, 5))
-        //{
-        //    slopeAngleX = Vector3.SignedAngle(controller.transform.up, hit2.normal, controller.transform.right);
-        //    slopeAngleZ = Vector3.Angle(controller.transform.right, hit2.normal) - 90;
-
-        //    //Debug.Log("slopeangle: " + Vector3.Angle(controller.transform.right, hit2.normal) );
-        //}
+//;
+//      
 
         Walk();
         if(controller == null)
@@ -161,14 +154,26 @@ public class DragonController : ThirdPersonController
         if (isMoving && !isFlying && isgrounded && !isHoverMode)
         {
             transform.rotation = Quaternion.Euler(slopeAngleX, angle, slopeAngleZ);
-
             turnSmootheTime = walkTurnSmootheTime;
             oldRotationAngley = angle;
             transform.Translate(Vector3.forward * speed*speedModifier * Time.deltaTime);
 
         }
     }
+    //private Vector3 AdjustedVelocityToSlope(Vector3 velocity)
+    //{
 
+    //    if (isgrounded)
+    //    {
+    //        var slopeRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+    //        var adjustedVelocity = slopeRotation * Vector3.forward.normalized * speed;
+    //        if (adjustedVelocity.y < 0)
+    //        {
+    //            return adjustedVelocity;
+    //        }
+    //    }
+    //    return Vector3.forward.normalized * speed;
+    //}
     protected virtual void Hover()
     {
         CameraCalculations(out float targetAngle, out float angle);
@@ -308,7 +313,7 @@ public class DragonController : ThirdPersonController
             {
                 isfreeFall = true;
                 isgrounded = false;
-                
+
             }
             else if (q + w + e + r >= 3)
             {
