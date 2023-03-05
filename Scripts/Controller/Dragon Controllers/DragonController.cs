@@ -38,7 +38,7 @@ public class DragonController : ThirdPersonController
     Vector3 oldEulerAngle;
     float anglex;
     Component[] SpineAnimators;
-    Rigidbody rb;
+    [SerializeField] Rigidbody rb;
     public GameObject target;
     float oldRotationAngley;
     
@@ -64,8 +64,9 @@ public class DragonController : ThirdPersonController
 
         oldRotationAngley = transform.rotation.y;
         SpineAnimators = GetComponents<FIMSpace.FSpine.FSpineAnimator>();
-        rb = GetComponent<Rigidbody>();
-      
+       // rb = GetComponent<Rigidbody>();
+  
+
     }
     protected override void Update()
     {
@@ -80,6 +81,7 @@ public class DragonController : ThirdPersonController
         MovementTime();
         Gravity();
         Jump();
+       
      //   SpineAnimator();
         flightStats.CurrentSpeed(airSpeed);
         flightStats.CurrentStamina(stamina);
@@ -91,7 +93,7 @@ public class DragonController : ThirdPersonController
         flightStats.SetMinStamina(minStamina);
         DragonFlightParameters();
 
-        rbodyVelocity = GetComponent<Rigidbody>().velocity;
+        rbodyVelocity = rb.velocity;
 
 //;
 //      

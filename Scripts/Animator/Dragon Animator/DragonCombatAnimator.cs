@@ -60,6 +60,7 @@ public class DragonCombatAnimator : CombatAnimator
                         {
                             GetComponent<InputController>().isPrimaryAttack = false;
                             GetComponent<InputController>().isSheating = false;
+                            GetComponent<InputController>().isJumpPressed = false;
                             animEvent = true;
                         }
 
@@ -81,6 +82,7 @@ public class DragonCombatAnimator : CombatAnimator
                         {
                             GetComponent<InputController>().isPrimaryAttack = false;
                             GetComponent<InputController>().isSheating = false;
+                            GetComponent<InputController>().isJumpPressed = false;
                             j = 0;
                         }
                         else
