@@ -21,7 +21,7 @@ public class DragonCombatAnimator : CombatAnimator
     protected override void Update()
     {
         base.Update();
-        GetEventName();
+       // GetEventName();
         weaponType = GetComponent<DragonCombatController>().weaponType;
     }
 

@@ -79,6 +79,7 @@ public class DragonController : ThirdPersonController
         AirSpeedLogic();
         MovementTime();
         Gravity();
+        Jump();
      //   SpineAnimator();
         flightStats.CurrentSpeed(airSpeed);
         flightStats.CurrentStamina(stamina);
@@ -455,7 +456,11 @@ public class DragonController : ThirdPersonController
 
     protected override void Jump()
     {
-        return;
+        if (isJumpPressed)
+        {
+            transform.Translate(Vector3.forward * 5*Time.deltaTime);
+        }
+     
     }
     protected virtual float AirSpeedLogic()
     {
