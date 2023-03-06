@@ -449,7 +449,7 @@ public class DragonController : ThirdPersonController
     {
         if (isJumpPressed)
         {
-            //transform.Translate(Vector3.up * 5*Time.deltaTime);
+            transform.Translate(Vector3.up * num *Time.deltaTime);
             //transform.Translate(Vector3.forward * 10 * Time.deltaTime);
         }
      
