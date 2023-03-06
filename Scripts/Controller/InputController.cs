@@ -93,27 +93,17 @@ public class InputController : MonoBehaviour
         {
             isMoving = false;
         }
-        if (Input.GetButtonDown("Jump") && ((onGround && isModified && isMoving)))
+        if (Input.GetButtonDown("Jump") && ((!isFlying && isModified && isMoving)))
         {
             isJumpPressed = true;
-            isFalling = false;
-            //previousjump = true;
-
-            //if last frame is jumpressed and still not on ground then jumpress is true
+            currentjump = true;
+            previousjump= false; 
         }
-        //else if (!onGround && previousjump)
-        //{
-
-        //    isJumpPressed = true;
-        //    currentjump = false;
-
-        //}
-        //if (currentjump == false && onGround)
-        //{
-        //    isJumpPressed = false;
-        //    currentjump = true;
-        //    previousjump = false;
-        //}
+        if (isJumpPressed && isFalling)
+        {
+            isJumpPressed = false;
+            currentjump = false;
+        }
         if (Input.GetButton("Modified"))
         {
             isModified = true;

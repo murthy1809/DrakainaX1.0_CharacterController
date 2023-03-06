@@ -9,7 +9,7 @@ public class DragonCombatAnimator : CombatAnimator
     internal string weaponType;
     public bool animEvent = true;//
     public string eventFunctionName;
-    public bool eventFired;
+    public bool eventFired, jumpaction;
     public float triggertolerance,lowertolerance,num;
     float triggerTime;
     float animLength;
@@ -21,7 +21,7 @@ public class DragonCombatAnimator : CombatAnimator
     protected override void Update()
     {
         base.Update();
-       // GetEventName();
+        // GetEventName();
         weaponType = GetComponent<DragonCombatController>().weaponType;
     }
 
@@ -60,8 +60,11 @@ public class DragonCombatAnimator : CombatAnimator
                         {
                             GetComponent<InputController>().isPrimaryAttack = false;
                             GetComponent<InputController>().isSheating = false;
-                            GetComponent<InputController>().isJumpPressed = false;
                             animEvent = true;
+                            if (isJumpPressed)
+                            {
+                                isJumpPressed = false;
+                            }
                         }
 
                     }
@@ -82,7 +85,7 @@ public class DragonCombatAnimator : CombatAnimator
                         {
                             GetComponent<InputController>().isPrimaryAttack = false;
                             GetComponent<InputController>().isSheating = false;
-                            GetComponent<InputController>().isJumpPressed = false;
+                            //GetComponent<InputController>().isJumpPressed = false;
                             j = 0;
                         }
                         else

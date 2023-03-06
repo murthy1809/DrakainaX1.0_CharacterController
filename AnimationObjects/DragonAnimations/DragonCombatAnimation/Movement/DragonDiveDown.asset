@@ -15,7 +15,7 @@ MonoBehaviour:
   name: 
   isCondition: 0
   AnimClips:
-  - _FadeDuration: 0.25
+  - _FadeDuration: 1
     _Events:
       _NormalizedTimes: []
       _Callbacks: []
@@ -28,11 +28,13 @@ MonoBehaviour:
   IsGrounded: 0
   IsModified: 2
   IsFalling: 1
-  IsJumpPressed: 0
+  IsJumpPressed: 2
   IsCrouched: 0
   ObstacleDetect: 0
   IsHoverMode: 0
   IsFlying: 0
+  IsAction: 0
+  IsClimbing: 0
   IsPrimaryAttack: 2
   IsSecondaryAttack: 2
   IsCombatMode: 2

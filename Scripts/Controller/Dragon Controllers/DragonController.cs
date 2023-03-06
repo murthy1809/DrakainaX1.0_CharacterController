@@ -29,6 +29,7 @@ public class DragonController : ThirdPersonController
     [SerializeField] internal float glideSpeedDecay;
     [SerializeField] internal float downTimeRight;
     [SerializeField] internal float keydowntime;
+    [SerializeField] GameObject model;
 
     public FlightStats flightStats;
     private bool butOnlyOnce = false;
@@ -81,6 +82,7 @@ public class DragonController : ThirdPersonController
         MovementTime();
         Gravity();
         Jump();
+        //rb.position = model.transform.position;
        
      //   SpineAnimator();
         flightStats.CurrentSpeed(airSpeed);
@@ -163,20 +165,7 @@ public class DragonController : ThirdPersonController
 
         }
     }
-    //private Vector3 AdjustedVelocityToSlope(Vector3 velocity)
-    //{
 
-    //    if (isgrounded)
-    //    {
-    //        var slopeRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-    //        var adjustedVelocity = slopeRotation * Vector3.forward.normalized * speed;
-    //        if (adjustedVelocity.y < 0)
-    //        {
-    //            return adjustedVelocity;
-    //        }
-    //    }
-    //    return Vector3.forward.normalized * speed;
-    //}
     protected virtual void Hover()
     {
         CameraCalculations(out float targetAngle, out float angle);
@@ -460,7 +449,8 @@ public class DragonController : ThirdPersonController
     {
         if (isJumpPressed)
         {
-            transform.Translate(Vector3.forward * 5*Time.deltaTime);
+            //transform.Translate(Vector3.up * 5*Time.deltaTime);
+            //transform.Translate(Vector3.forward * 10 * Time.deltaTime);
         }
      
     }
