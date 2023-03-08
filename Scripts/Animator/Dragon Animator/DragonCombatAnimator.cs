@@ -52,6 +52,7 @@ public class DragonCombatAnimator : CombatAnimator
                 _Animancer.Animator.applyRootMotion = PAnimator.CombatAnim[i].applyRootMotion;
                 if (PAnimator.CombatAnim[i].AnimClips.Count == 1)
                 {
+                    j = 0;
                     if (_Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]).NormalizedTime >=
                         _Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]).NormalizedEndTime)
                     {
@@ -79,7 +80,7 @@ public class DragonCombatAnimator : CombatAnimator
                     if (_Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]).NormalizedTime >=
                        _Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]).NormalizedEndTime)
                     {
-                        _Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]);
+                       // _Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]);
 
                         if (j == PAnimator.CombatAnim[i].AnimClips.Count - 1)
                         {
@@ -97,6 +98,10 @@ public class DragonCombatAnimator : CombatAnimator
                 else
                 {
                     PAnimator.CombatAnim[i].AnimClips[j].Events.OnEnd = Idle;
+                }
+                if (PAnimator.CombatAnim[i].AnimClips.Count == 0)
+                {
+                    return;
                 }
             }
             
