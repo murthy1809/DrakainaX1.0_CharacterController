@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85635e141e0502e49a7418dce1d1d188, type: 3}
   m_Name: Dragon_Zoom
   m_EditorClassIdentifier: 
-  VerticalFOV: 80
-  TopRigHeight: 2
-  TopRigRadius: 2
-  MiddleRigHeight: 0
-  MiddleRigRadius: 2
-  BottomRigHeight: -1
-  BotttomRigRadius: 2
+  VerticalFOV: 30
+  TopRigHeight: 10
+  TopRigRadius: 0
+  MiddleRigHeight: 5
+  MiddleRigRadius: 10
+  BottomRigHeight: -5
+  BotttomRigRadius: 10

@@ -8,16 +8,15 @@ public class DragonIK : InverseKinematics
 
     void Update()
     {
-      
+
         if (input.isSecondaryAttack)
         {
             rig.enabled = true;
 
         }
-        else 
+        else
         {
             rig.enabled = false;
         }
-
     }
 }
