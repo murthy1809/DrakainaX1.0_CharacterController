@@ -82,9 +82,10 @@ public class DragonController : ThirdPersonController
         MovementTime();
         Gravity();
         Jump();
+        
         //rb.position = model.transform.position;
-       
-     //   SpineAnimator();
+
+        //   SpineAnimator();
         flightStats.CurrentSpeed(airSpeed);
         flightStats.CurrentStamina(stamina);
 
@@ -378,8 +379,13 @@ public class DragonController : ThirdPersonController
             }
             else if(!Input.GetButton("SecondaryAttack"))
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5 * Time.deltaTime);
-                transform.rotation = Quaternion.Euler(pitch.eulerAngles.x, transform.eulerAngles.y, roll.eulerAngles.z);
+
+                if (!GetComponent<VCam>().freeLook)
+                {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5 * Time.deltaTime);
+                    transform.rotation = Quaternion.Euler(pitch.eulerAngles.x, transform.eulerAngles.y, roll.eulerAngles.z);
+                }
+
             }
         }
         else if (isHoverMode && airSpeed >= minairSpeed && !isMoving)
@@ -408,8 +414,12 @@ public class DragonController : ThirdPersonController
             }
             else
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5 * Time.deltaTime);
-                transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, roll.eulerAngles.z);
+
+                if (!GetComponent<VCam>().freeLook)
+                {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5 * Time.deltaTime);
+                    transform.rotation = Quaternion.Euler(pitch.eulerAngles.x, transform.eulerAngles.y, roll.eulerAngles.z);
+                }
             }
         }
         else
