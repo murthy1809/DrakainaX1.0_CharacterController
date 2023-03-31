@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-using System.Diagnostics;
 
 public class VCam : MonoBehaviour
 {
@@ -11,7 +8,8 @@ public class VCam : MonoBehaviour
     [SerializeField] Transform LookAt,Follow,ZoomLook;
     public bool freeLook;
     [SerializeField] float freeLookTime;
-
+    public bool TimerOn = false;
+    public float TimeLeft;
 
     void Start()
     {
@@ -26,7 +24,6 @@ public class VCam : MonoBehaviour
         }
 
         if (Input.GetButton("SecondaryAttack"))
-        // if (Input.GetButtonDown("SecondaryAttack"))
         {
 
             vCam.LookAt = ZoomLook;
@@ -45,6 +42,10 @@ public class VCam : MonoBehaviour
             vCam.m_RecenterToTargetHeading.m_enabled = false;
             vCam.m_YAxisRecentering.m_enabled = false;
             freeLook = true;
+            TimeLeft = 1;
+          
+            
+          
         }
         else /*if (Input.GetKeyDown(KeyCode.LeftAlt))*/
         {
@@ -63,21 +64,46 @@ public class VCam : MonoBehaviour
             vCam.m_Lens.FieldOfView = vCO.VerticalFOV;
             vCam.m_Heading.m_Bias = 0;
 
-            vCam.m_RecenterToTargetHeading.m_enabled = true;
-            vCam.m_YAxisRecentering.m_enabled = true;
-
-            IEnumerator ExecuteAfterTime(float time)
-            {
-                yield return new WaitForSeconds(time);
-                vCam.m_RecenterToTargetHeading.m_enabled = false;
-                vCam.m_YAxisRecentering.m_enabled = false;
-                freeLook = false;
-            }
-            StartCoroutine(ExecuteAfterTime(freeLookTime));
-
+          
+            TimerOn = true;
 
         }
+
+        if (TimerOn)
+        {
+            if(TimeLeft > 0)
+            {
+                TimeLeft -= Time.deltaTime;
+                updateTimer(TimeLeft);
+                vCam.m_RecenterToTargetHeading.m_enabled = true;
+                vCam.m_YAxisRecentering.m_enabled = true;
+            }
+            else
+            {
+                Debug.Log("TimeisUp");
+                vCam.m_RecenterToTargetHeading.m_enabled = false;
+                vCam.m_YAxisRecentering.m_enabled = false;
+                TimeLeft = 0;
+                TimerOn = false;
+                freeLook = false;
+            }
+        }
+
+        //IEnumerator ExecuteAfterTime(float time)
+        //{
+        //    yield return new WaitForSeconds(time);
+        //    vCam.m_RecenterToTargetHeading.m_enabled = false;
+        //    vCam.m_YAxisRecentering.m_enabled = false;
+        //}
+        //StartCoroutine(ExecuteAfterTime(freeLookTime));
+        
     }
 
+    void updateTimer(float currentTime)
+    {
+        currentTime += 1;
 
+        float minutes = Mathf.FloorToInt(currentTime / 60);
+        float seconds = Mathf.FloorToInt(currentTime % 60);
+    }
 }
