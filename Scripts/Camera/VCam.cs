@@ -10,6 +10,7 @@ public class VCam : MonoBehaviour
     [SerializeField] float freeLookTime;
     public bool TimerOn = false;
     public float TimeLeft;
+    bool t;
 
     void Start()
     {
@@ -38,14 +39,12 @@ public class VCam : MonoBehaviour
             vCam.m_Heading.m_Bias = 0;
             vCam.m_YAxis.m_MaxSpeed = 20;
             vCam.m_XAxis.m_MaxSpeed = 300;
-
-            vCam.m_RecenterToTargetHeading.m_enabled = false;
-            vCam.m_YAxisRecentering.m_enabled = false;
             freeLook = true;
             TimeLeft = 1;
-          
-            
-          
+            TimerOn = false;
+
+
+
         }
         else /*if (Input.GetKeyDown(KeyCode.LeftAlt))*/
         {
@@ -64,9 +63,8 @@ public class VCam : MonoBehaviour
             vCam.m_Lens.FieldOfView = vCO.VerticalFOV;
             vCam.m_Heading.m_Bias = 0;
 
-          
-            TimerOn = true;
 
+            TimerOn = true;
         }
 
         if (TimerOn)
@@ -80,13 +78,17 @@ public class VCam : MonoBehaviour
             }
             else
             {
-                Debug.Log("TimeisUp");
                 vCam.m_RecenterToTargetHeading.m_enabled = false;
                 vCam.m_YAxisRecentering.m_enabled = false;
                 TimeLeft = 0;
                 TimerOn = false;
                 freeLook = false;
             }
+        }
+        else
+        {
+            vCam.m_RecenterToTargetHeading.m_enabled = false;
+            vCam.m_YAxisRecentering.m_enabled = false;
         }
 
         //IEnumerator ExecuteAfterTime(float time)
