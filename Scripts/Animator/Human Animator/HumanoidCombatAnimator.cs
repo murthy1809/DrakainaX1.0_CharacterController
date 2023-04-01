@@ -146,7 +146,6 @@ public class HumanoidCombatAnimator : CombatAnimator
                 }
                 else
                 {
-
                     triggerTime = PAnimator.CombatAnim[i].AnimClips[j].Clip.events[0].time;
                     animLength = PAnimator.CombatAnim[i].AnimClips[j].Clip.length;
                     animTime = _Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]).NormalizedTime;
