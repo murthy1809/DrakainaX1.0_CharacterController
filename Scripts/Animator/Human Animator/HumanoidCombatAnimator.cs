@@ -167,10 +167,10 @@ public class HumanoidCombatAnimator : CombatAnimator
                     if (PAnimator.CombatAnim[i].AnimClips.Count > 1)
                     {
 
-                        if (j == PAnimator.CombatAnim[i].AnimClips.Count)
-                        {
-                            j = 0;
-                        }
+                        //if (j == PAnimator.CombatAnim[i].AnimClips.Count)
+                        //{
+                        //    j = 0;
+                        //}
                         if(PAnimator.CombatAnim[i].AnimClips[j].Clip.events.Length == 0)
                         {
                             return;
