@@ -21,8 +21,8 @@ public class HumanoidSoundClips : MonoBehaviour
    
     private void Update()
     {
-        //PlaySwordSounds();
-        //PlayHumanSounds();
+        PlaySwordSounds();
+        PlayHumanSounds();
     }
 
     protected virtual AudioClip PlaySwordSounds()
