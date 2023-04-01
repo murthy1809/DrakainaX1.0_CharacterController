@@ -146,54 +146,21 @@ public class HumanoidCombatAnimator : CombatAnimator
                 }
                 else
                 {
-                    if (PAnimator.CombatAnim[i].AnimClips.Count == 1)
+
+                    triggerTime = PAnimator.CombatAnim[i].AnimClips[j].Clip.events[0].time;
+                    animLength = PAnimator.CombatAnim[i].AnimClips[j].Clip.length;
+                    animTime = _Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]).NormalizedTime;
+                    normTriggerTime = triggerTime / animLength;
+                    eventFunctionName = PAnimator.CombatAnim[i].AnimClips[0].Clip.events[0].functionName;
+                    if (Mathf.Abs(animTime - normTriggerTime) <= triggertolerance)
+
                     {
-                        triggerTime = PAnimator.CombatAnim[i].AnimClips[j].Clip.events[0].time;
-                        animLength = PAnimator.CombatAnim[i].AnimClips[j].Clip.length;
-                        animTime = _Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]).NormalizedTime;
-                        normTriggerTime = triggerTime / animLength;
-                        eventFunctionName = PAnimator.CombatAnim[i].AnimClips[0].Clip.events[0].functionName;
-                        if (Mathf.Abs(animTime - normTriggerTime) <= triggertolerance)
-
-                        {
-                            eventFired = true;
-                        }
-                        else
-                        {
-                            eventFired = false;
-                        }
+                        eventFired = true;
                     }
-
-                    if (PAnimator.CombatAnim[i].AnimClips.Count > 1)
+                    else
                     {
-
-                        //if (j == PAnimator.CombatAnim[i].AnimClips.Count)
-                        //{
-                        //    j = 0;
-                        //}
-                        if(PAnimator.CombatAnim[i].AnimClips[j].Clip.events.Length == 0)
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            triggerTime = PAnimator.CombatAnim[i].AnimClips[j].Clip.events[0].time;
-                        }
-                     
-                        animLength = PAnimator.CombatAnim[i].AnimClips[j].Clip.length;
-                        animTime = _Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]).NormalizedTime;
-                        normTriggerTime = triggerTime / animLength;
-                        eventFunctionName = PAnimator.CombatAnim[i].AnimClips[j].Clip.events[0].functionName;
-                        if (Mathf.Abs(animTime - normTriggerTime) <= triggertolerance)
-
-                        {
-                            eventFired = true;
-                        }
-                        else
-                        {
-                            eventFired = false;
-                        }
-                    }
+                        eventFired = false;
+                    }                   
 
                 }                        
             }
