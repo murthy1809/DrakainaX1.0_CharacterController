@@ -155,6 +155,7 @@ public class HumanoidCombatAnimator : CombatAnimator
 
                     {
                         eventFired = true;
+                        Debug.Log("trigger");
                     }
                     else
                     {

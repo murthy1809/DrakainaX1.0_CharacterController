@@ -57,7 +57,6 @@ public class HumanoidSoundClips : MonoBehaviour
                 audioGroup = HumanSounds[i].AudioGroup;
                 audioClip = HumanSounds[i].Clips[Random.Range(0, HumanSounds[i].Clips.Length)];
                 manager.HumanSound(audioClip);
-                Debug.Log(HumanSounds[i].Clips.Rank);
             }
             else
             {
