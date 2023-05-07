@@ -20,7 +20,7 @@ public class HumanoidCombatAnimator : CombatAnimator
     protected override void Update()
     {
         base.Update();
-        GetEventName();
+        //GetEventName();
         isClimbing = GetComponent<HumanoidColliderManger>().isClimbing;
         isDirection = PAnimator.PlayerScript.playerContoller.inputController.directions;
         isObstacle = PAnimator.PlayerScript.colliderManager.rayCasts.isObstacle;
@@ -91,6 +91,7 @@ public class HumanoidCombatAnimator : CombatAnimator
                         {
                             j = j + 1; ;
                         }
+                        // IF J > COUNT-1 THEN J = 0 OR J = COUNT OR CANCEL ANIM
                     }
                 }
                 else
@@ -114,57 +115,6 @@ public class HumanoidCombatAnimator : CombatAnimator
         _Idle.FadeDuration = 0.25f;
     }
 
-    private void GetEventName()
-    {
-        for (int i = 0; i < PAnimator.CombatAnim.Count; i++)
-        {
-
-            if ((isMoving == PAnimator.CombatAnim[i].ISMOVING) &&
-                isModified == PAnimator.CombatAnim[i].ISMODFIED &&
-                isJumpPressed == PAnimator.CombatAnim[i].ISJUMPPRESSED &&
-                isFalling == PAnimator.CombatAnim[i].ISFALLING &&
-                onGround == PAnimator.CombatAnim[i].ISGROUNDED &&
-                isObstacle == PAnimator.CombatAnim[i].OBSTACLEDETECT &&
-                isHovermode == PAnimator.CombatAnim[i].ISHOVERMODE &&
-                isFlying == PAnimator.CombatAnim[i].ISFLYING &&
-                isCrouch == PAnimator.CombatAnim[i].ISCROUCHED &&
-                isPrimaryAttack == PAnimator.CombatAnim[i].ISPRIMARYATTACK &&
-                isCombatMode == PAnimator.CombatAnim[i].ISCOMBATMODE &&
-                weaponType == PAnimator.CombatAnim[i].WEAPONTYPE &&
-                isSheating == PAnimator.CombatAnim[i].ISSHEATING &&
-                isDirection == PAnimator.CombatAnim[i].DIRECTIONS &&
-                weaponType == PAnimator.CombatAnim[i].WEAPONTYPE &&
-                isSecondaryAttack == PAnimator.CombatAnim[i].ISSECONDARYATTACK &&
-                primaryTaps == PAnimator.CombatAnim[i].PRIMARYTAPS
-                )
-            {
-
-
-                if (PAnimator.CombatAnim[i].AnimClips[0].Clip.events.Length == 0)
-                {
-                    return;
-                }
-                else
-                {
-                    triggerTime = PAnimator.CombatAnim[i].AnimClips[j].Clip.events[0].time;
-                    animLength = PAnimator.CombatAnim[i].AnimClips[j].Clip.length;
-                    animTime = _Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]).NormalizedTime;
-                    normTriggerTime = triggerTime / animLength;
-                    eventFunctionName = PAnimator.CombatAnim[i].AnimClips[0].Clip.events[0].functionName;
-                    if (Mathf.Abs(animTime - normTriggerTime) <= triggertolerance)
-
-                    {
-                        eventFired = true;
-                        Debug.Log("trigger");
-                    }
-                    else
-                    {
-                        eventFired = false;
-                    }                   
-
-                }                        
-            }
-        }
-    }
+   
 
 }
