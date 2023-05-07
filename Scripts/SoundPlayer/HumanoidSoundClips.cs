@@ -22,7 +22,7 @@ public class HumanoidSoundClips : MonoBehaviour
     private void Update()
     {
         PlaySwordSounds();
-        PlayHumanSounds();
+       // PlayHumanSounds();
     }
 
     protected virtual AudioClip PlaySwordSounds()
@@ -47,27 +47,35 @@ public class HumanoidSoundClips : MonoBehaviour
     }
 
 
-    protected virtual AudioClip PlayHumanSounds()
+    //protected virtual AudioClip PlayHumanSounds()
+    //{
+    //    for (int i = 0; i < HumanSounds.Count; i++)
+    //    {
+    //        if ( GetComponent<HumanoidCombatAnimator>().eventFunctionName == HumanSounds[i].AudioGroup  &&
+    //            GetComponent<HumanoidCombatAnimator>().eventFired)
+    //        {
+    //            audioGroup = HumanSounds[i].AudioGroup;
+    //            audioClip = HumanSounds[i].Clips[Random.Range(0, HumanSounds[i].Clips.Length)];
+    //            manager.HumanSound(audioClip);
+    //        }
+    //        else
+    //        {
+    //            audioClip = null;
+    //        }
+
+    //    }
+    //    return audioClip;
+    //}
+
+
+    protected void SendEvent()
     {
         for (int i = 0; i < HumanSounds.Count; i++)
         {
-            if ( GetComponent<HumanoidCombatAnimator>().eventFunctionName == HumanSounds[i].AudioGroup  &&
-                GetComponent<HumanoidCombatAnimator>().eventFired)
-            {
-                audioGroup = HumanSounds[i].AudioGroup;
-                audioClip = HumanSounds[i].Clips[Random.Range(0, HumanSounds[i].Clips.Length)];
-                manager.HumanSound(audioClip);
-            }
-            else
-            {
-                audioClip = null;
-            }
-
+            audioClip = HumanSounds[i].Clips[Random.Range(0, HumanSounds[i].Clips.Length)];
+            manager.HumanSound(audioClip);
         }
-        return audioClip;
     }
-
-
 
     protected virtual void FootSteps()
     {

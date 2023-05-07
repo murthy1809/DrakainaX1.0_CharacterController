@@ -15,8 +15,8 @@ MonoBehaviour:
   AudioGroup: SendEvent
   Clips:
   - {fileID: 8300000, guid: 08aa96fbe1a144b44a4451f133fc21f8, type: 3}
-  - {fileID: 8300000, guid: 02ea9d5495b4e0e47ad6175ccfb23072, type: 3}
   - {fileID: 8300000, guid: a95172e252f7ccc49bf6de483e076c73, type: 3}
+  - {fileID: 8300000, guid: 02ea9d5495b4e0e47ad6175ccfb23072, type: 3}
   TerrainIndex: 0
   Volume: 0.481
   Pitch: -0.49

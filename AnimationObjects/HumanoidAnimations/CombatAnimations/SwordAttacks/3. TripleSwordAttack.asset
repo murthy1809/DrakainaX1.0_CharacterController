@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b494b69dd65c1984db95dffe442d738d, type: 3}
   m_Name: 3. TripleSwordAttack
   m_EditorClassIdentifier: 
-  name: 
+  name: SendEvent
   isCondition: 0
   AnimClips:
   - _FadeDuration: 0.25
@@ -40,7 +40,7 @@ MonoBehaviour:
       _Callbacks: []
       _Names: []
     _Clip: {fileID: 7400100, guid: a9e228972999b0d46a21e30edf97d812, type: 3}
-    _Speed: 1
+    _Speed: NaN
     _NormalizedStartTime: NaN
   applyRootMotion: 1
   IsMoving: 2
@@ -52,6 +52,8 @@ MonoBehaviour:
   ObstacleDetect: 0
   IsHoverMode: 0
   IsFlying: 0
+  IsAction: 0
+  IsClimbing: 0
   IsPrimaryAttack: 1
   IsSecondaryAttack: 2
   IsCombatMode: 1

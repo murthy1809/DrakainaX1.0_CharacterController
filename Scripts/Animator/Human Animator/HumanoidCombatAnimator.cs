@@ -73,7 +73,7 @@ public class HumanoidCombatAnimator : CombatAnimator
                         PAnimator.CombatAnim[i].AnimClips[j].Events.OnEnd = Idle;
                     }
                 }
-                if (PAnimator.CombatAnim[i].AnimClips.Count > 1)
+                else if (PAnimator.CombatAnim[i].AnimClips.Count > 1)
                 {
 
                     if (_Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]).NormalizedTime >=
