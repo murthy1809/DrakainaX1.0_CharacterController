@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RPG.Saving;
+using RPG.SceneManagement;
 //
 
-public class HumanoidController : ThirdPersonController
+public class HumanoidController : ThirdPersonController, ISaveable
 {
     [SerializeField] internal HumanoidColliderManger humanoidCollider;
     [SerializeField] internal float jumpnum;
@@ -18,6 +20,7 @@ public class HumanoidController : ThirdPersonController
     int layerMask = 1 << 9;
     bool isClimbing;
     Vector3 moveDir;
+    Vector3 initialPosition;
 
     private void OnEnable()
     {
@@ -25,19 +28,17 @@ public class HumanoidController : ThirdPersonController
     }
     protected override void Update()
     {
+        initialPosition = transform.position;
         base.Update();
         CrouchAndSlide();
         SpeedLogic();
-        Walk();
         humanStats.CurrentStamina(stamina);
         humanStats.SetMaxStamina(maxStamina);
         humanStats.SetMinStamina(minStamina);
-        //Jump();
         Stamina();
         isSecondaryAttack = playerController.inputController.isSecondaryAttack;
         isobstacle = humanoidCollider.humanoidRay.isObstacle;
-        isClimbing = humanoidCollider.isClimbing;
-      
+        isClimbing = humanoidCollider.isClimbing;     
  
     }
 
@@ -177,17 +178,17 @@ public class HumanoidController : ThirdPersonController
             playerVelocity.y = 0;
             //isgrounded = false;
             GetComponent<InputController>().isCombatMode = false;
-            transform.rotation = Quaternion.Euler(0,0,0);
-            transform.position = new Vector3(humanoidCollider.ladderTransform.x, transform.position.y, humanoidCollider.ladderTransform.z -0.73f);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.position = new Vector3(humanoidCollider.ladderTransform.x, transform.position.y, humanoidCollider.ladderTransform.z - 0.73f);
             if (Input.GetKey(KeyCode.W) && isMoving)
             {
                 controller.Move(Vector3.up * climbSpeed * Time.deltaTime); // ClimbSpeed set to 2 always
-               
+
             }
             if (Input.GetKey(KeyCode.S))
             {
                 controller.Move(-Vector3.up * climbSpeed * Time.deltaTime);
-                
+
             }
         }
         else /*if(!isClimbing)*/
@@ -231,4 +232,26 @@ public class HumanoidController : ThirdPersonController
         }
     }
 
+    [System.Serializable]
+    struct SaveData
+    {
+        public SerializableVector3 position;
+        public SerializableVector3 velocity;
+        public CollisionFlags savedController;
+    }
+   
+    public object CaptureState()
+    {
+        SaveData data = new SaveData();
+        data.position = new SerializableVector3(transform.position);
+        return data;
+    
+    }
+
+    public void RestoreState(object state)
+    {
+        SaveData data = (SaveData)state;
+        transform.position = data.position.ToVector();       
+
+    }
 }

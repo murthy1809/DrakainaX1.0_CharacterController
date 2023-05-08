@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using Cinemachine;
+using MalbersAnimations;
 
 public class ThirdPersonController : MonoBehaviour
 {
@@ -83,7 +84,11 @@ public class ThirdPersonController : MonoBehaviour
     protected virtual void Gravity()
     {
         playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        if (!(Input.GetKeyDown(KeyCode.F6)))
+        {
+            controller.Move(playerVelocity * Time.deltaTime);
+        }
+       
     }
 
     protected virtual void FreeFall()
@@ -177,6 +182,7 @@ public class ThirdPersonController : MonoBehaviour
         targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
         angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmootheTime);
     }
+
 
     /////////////////
 
