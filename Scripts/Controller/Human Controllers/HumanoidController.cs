@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Saving;
 using RPG.SceneManagement;
-//
+/// <summary>
+/// //
+/// </summary>
 
 public class HumanoidController : ThirdPersonController, ISaveable
 {
