@@ -1,3 +1,5 @@
+using GameDevTV.Inventories;
+using GameDevTV.UI.Inventories;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +9,10 @@ public class HumanoidColliderManger : ColliderManager
 {
     [SerializeField] internal HumanoidRayCasts humanoidRay;
     [SerializeField] Text text;
-    public bool isClimbing, isClimbingExit;
+    public bool isClimbing, isClimbingExit, inventoryHit;
     public int y;
     public Vector3 ladderTransform;
+
 
     private void OnTriggerStay(Collider other)
     {
@@ -41,8 +44,14 @@ public class HumanoidColliderManger : ColliderManager
             GetComponent<InputController>().isAction = false;
         
         }
-
+        if (hit.collider.tag == "Inventory")
+        {
+            inventoryHit = true;
+        }
+        else
+        {
+            inventoryHit = false;
+        }
     }
-
 
 }
