@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RPG.Saving;
 /// <summary>
 /// //
 /// </summary>
 
-public class HumanoidController : ThirdPersonController
+public class HumanoidController : ThirdPersonController,ISaveable
 {
     [SerializeField] internal HumanoidColliderManger humanoidCollider;
     [SerializeField] internal float jumpnum;
@@ -52,8 +53,6 @@ public class HumanoidController : ThirdPersonController
         else if (isJumpPressed && isgrounded && !isobstacle)
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -1 * gravityValue);
-            Debug.Log("Jump");
-
         }
     }
 
@@ -231,5 +230,7 @@ public class HumanoidController : ThirdPersonController
             stamina = minStamina;
         }
     }
+
+    public object CaptureState()
 
 }
