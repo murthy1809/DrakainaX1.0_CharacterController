@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RPG.Saving;
-using RPG.SceneManagement;
 /// <summary>
 /// //
 /// </summary>
 
-public class HumanoidController : ThirdPersonController, ISaveable
+public class HumanoidController : ThirdPersonController
 {
     [SerializeField] internal HumanoidColliderManger humanoidCollider;
     [SerializeField] internal float jumpnum;
@@ -234,26 +232,4 @@ public class HumanoidController : ThirdPersonController, ISaveable
         }
     }
 
-    [System.Serializable]
-    struct SaveData
-    {
-        public SerializableVector3 position;
-        public SerializableVector3 velocity;
-        public CollisionFlags savedController;
-    }
-   
-    public object CaptureState()
-    {
-        SaveData data = new SaveData();
-        data.position = new SerializableVector3(transform.position);
-        return data;
-    
-    }
-
-    public void RestoreState(object state)
-    {
-        SaveData data = (SaveData)state;
-        transform.position = data.position.ToVector();       
-
-    }
 }
