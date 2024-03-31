@@ -5,7 +5,7 @@ using UnityEngine;
 public class DragonSoundClips : MonoBehaviour
 {
     public List<SoundObjects> FootstepSounds = new List<SoundObjects>();
-    public List<SoundObjects> DragonSounds = new List<SoundObjects>();
+    public List<SoundObjects> Lizardsounds = new List<SoundObjects>();
     public List<SoundObjects> MeleeSounds = new List<SoundObjects>();
     public List<SoundObjects> FireSounds = new List<SoundObjects>();
     DragonSoundManager manager;
@@ -13,6 +13,7 @@ public class DragonSoundClips : MonoBehaviour
     public string audioGroup;
     private AudioClip audioClip, clip;
     DragonCombatAnimator animator;
+    bool hasSoundPlayed = false;
    // public bool isMetalHit;
     private void Awake()
     {    
@@ -27,16 +28,17 @@ public class DragonSoundClips : MonoBehaviour
         PlayDragonSounds();
         PlayMeleeSounds();
         PlayFireSounds();
+        
     }
 
     void Landing()
     {
-        for (int i = 0; i < DragonSounds.Count; i++)
+        for (int i = 0; i < Lizardsounds.Count; i++)
         {
-            if (animator.eventFunctionName == DragonSounds[i].AudioGroup)
+            if (animator.eventFunctionName == Lizardsounds[i].AudioGroup)
             {
-                audioGroup = DragonSounds[i].AudioGroup;
-                audioClip = DragonSounds[i].Clips[Random.Range(0, DragonSounds[i].Clips.Length)];
+                audioGroup = Lizardsounds[i].AudioGroup;
+                audioClip = Lizardsounds[i].Clips[Random.Range(0, Lizardsounds[i].Clips.Length)];
                 manager.DragonSounds(audioClip);
             }
             else
@@ -45,23 +47,46 @@ public class DragonSoundClips : MonoBehaviour
             }
         }
     }
+
+    public void PlaySound()
+    {
+        hasSoundPlayed = true;
+    }
+
+  
     protected virtual AudioClip PlayDragonSounds()
     {
-        for (int i = 0; i < DragonSounds.Count; i++)
+       
+        for (int i = 0; i < Lizardsounds.Count; i++)
         {
-            if (animator.eventFunctionName == DragonSounds[i].AudioGroup &&
-                animator.eventFired)
+           
+            if (animator.eventFunctionName == Lizardsounds[i].AudioGroup &&
+               hasSoundPlayed)
             {
-                audioGroup = DragonSounds[i].AudioGroup;
-                audioClip = DragonSounds[i].Clips[Random.Range(0, DragonSounds[i].Clips.Length)];
+                audioGroup = Lizardsounds[i].AudioGroup;
+                audioClip = Lizardsounds[i].Clips[Random.Range(0, Lizardsounds[i].Clips.Length)];
                 manager.DragonSounds(audioClip);
+                hasSoundPlayed = false;
             }
             else
             {
                 audioClip = null;
+                hasSoundPlayed = false;
             }
         }
+        
         return audioClip;
+    }
+
+    public bool HasSoundPlayed()
+    {
+        return hasSoundPlayed;
+    }
+
+    // Method to reset the hasSoundPlayed boolean
+    public void ResetSoundPlayed()
+    {
+        hasSoundPlayed = false;
     }
 
 

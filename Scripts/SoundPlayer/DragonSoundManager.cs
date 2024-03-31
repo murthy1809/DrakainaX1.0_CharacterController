@@ -13,7 +13,10 @@ public class DragonSoundManager : SoundManager
 
     public void DragonSounds(AudioClip clip)
     {
-        dragonSounds.PlayOneShot(clip);
+        //dragonSounds.PlayOneShot(clip); ;
+        dragonSounds.clip = clip;
+        dragonSounds.Play() ;
+        // 
     }
 
     public void MeleeSounds(AudioClip clip)

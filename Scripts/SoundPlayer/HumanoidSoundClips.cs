@@ -35,6 +35,7 @@ public class HumanoidSoundClips : MonoBehaviour
                 audioGroup = SwordSounds[i].AudioGroup;
                 audioClip = SwordSounds[i].Clips[Random.Range(0, SwordSounds[i].Clips.Length)];
                 manager.SwordSound(audioClip);
+                print("sound");
 
             }
             else

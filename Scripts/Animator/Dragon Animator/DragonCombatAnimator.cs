@@ -56,7 +56,7 @@ public class DragonCombatAnimator : CombatAnimator
                     if (_Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]).NormalizedTime >=
                         _Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]).NormalizedEndTime)
                     {
-
+                        eventFunctionName = PAnimator.CombatAnim[i].AnimClips[j].Clip.events[j].functionName;
                         if (!isFlying)
                         {
                             GetComponent<InputController>().isPrimaryAttack = false;
@@ -80,8 +80,9 @@ public class DragonCombatAnimator : CombatAnimator
                     if (_Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]).NormalizedTime >=
                        _Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]).NormalizedEndTime)
                     {
-                       // _Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]);
-
+                        // _Animancer.Play(PAnimator.CombatAnim[i].AnimClips[j]);
+                        eventFunctionName = PAnimator.CombatAnim[i].AnimClips[j].Clip.events[j].functionName;
+                        print(eventFunctionName + " 2");
                         if (j == PAnimator.CombatAnim[i].AnimClips.Count - 1)
                         {
                             GetComponent<InputController>().isPrimaryAttack = false;
@@ -131,7 +132,7 @@ public class DragonCombatAnimator : CombatAnimator
                 isSecondaryAttack == PAnimator.CombatAnim[i].ISSECONDARYATTACK
                 )
             {
-
+                
                 if (PAnimator.CombatAnim[i].AnimClips[0].Clip.events.Length == 0)
                 {
                     return;
@@ -146,6 +147,7 @@ public class DragonCombatAnimator : CombatAnimator
                         animTime = state.NormalizedTime%1;
                         normTriggerTime = triggerTime / PAnimator.CombatAnim[i].AnimClips[j].Clip.length;
                         eventFunctionName = PAnimator.CombatAnim[i].AnimClips[0].Clip.events[0].functionName;
+                        
                         if (eventFired == false)
                         {
                             num = (animTime - normTriggerTime);
@@ -161,7 +163,6 @@ public class DragonCombatAnimator : CombatAnimator
                         {
                             eventFired = false;
                         }
-
                     }
 
                     if (PAnimator.CombatAnim[i].AnimClips.Count > 1)
@@ -183,7 +184,8 @@ public class DragonCombatAnimator : CombatAnimator
                         animTime = state.NormalizedTime % 1;
                         normTriggerTime = triggerTime / PAnimator.CombatAnim[i].AnimClips[j].Clip.length;
                         eventFunctionName = PAnimator.CombatAnim[i].AnimClips[0].Clip.events[0].functionName;
-                        if(eventFired == false)
+                       
+                        if (eventFired == false)
                         {
                            num  = (animTime - normTriggerTime);
                         }
