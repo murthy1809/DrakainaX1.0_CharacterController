@@ -5,7 +5,7 @@ using UnityEngine;
 public class DragonSoundClips : MonoBehaviour
 {
     public List<SoundObjects> FootstepSounds = new List<SoundObjects>();
-    public List<SoundObjects> Lizardsounds = new List<SoundObjects>();
+    public List<SoundObjects> DragonSounds = new List<SoundObjects>();
     public List<SoundObjects> MeleeSounds = new List<SoundObjects>();
     public List<SoundObjects> FireSounds = new List<SoundObjects>();
     DragonSoundManager manager;
@@ -33,12 +33,12 @@ public class DragonSoundClips : MonoBehaviour
 
     void Landing()
     {
-        for (int i = 0; i < Lizardsounds.Count; i++)
+        for (int i = 0; i < DragonSounds.Count; i++)
         {
-            if (animator.eventFunctionName == Lizardsounds[i].AudioGroup)
+            if (animator.eventFunctionName == DragonSounds[i].AudioGroup)
             {
-                audioGroup = Lizardsounds[i].AudioGroup;
-                audioClip = Lizardsounds[i].Clips[Random.Range(0, Lizardsounds[i].Clips.Length)];
+                audioGroup = DragonSounds[i].AudioGroup;
+                audioClip = DragonSounds[i].Clips[Random.Range(0, DragonSounds[i].Clips.Length)];
                 manager.DragonSounds(audioClip);
             }
             else
@@ -57,14 +57,13 @@ public class DragonSoundClips : MonoBehaviour
     protected virtual AudioClip PlayDragonSounds()
     {
        
-        for (int i = 0; i < Lizardsounds.Count; i++)
+        for (int i = 0; i < DragonSounds.Count; i++)
         {
            
-            if (animator.eventFunctionName == Lizardsounds[i].AudioGroup &&
-               hasSoundPlayed)
+            if (hasSoundPlayed)
             {
-                audioGroup = Lizardsounds[i].AudioGroup;
-                audioClip = Lizardsounds[i].Clips[Random.Range(0, Lizardsounds[i].Clips.Length)];
+                audioGroup = DragonSounds[i].AudioGroup;
+                audioClip = DragonSounds[i].Clips[Random.Range(0, DragonSounds[i].Clips.Length)];
                 manager.DragonSounds(audioClip);
                 hasSoundPlayed = false;
             }
@@ -78,32 +77,32 @@ public class DragonSoundClips : MonoBehaviour
         return audioClip;
     }
 
-    public bool HasSoundPlayed()
-    {
-        return hasSoundPlayed;
-    }
+   // public bool HasSoundPlayed()
+   // {
+   //     return hasSoundPlayed;
+   // }
 
-    // Method to reset the hasSoundPlayed boolean
-    public void ResetSoundPlayed()
-    {
-        hasSoundPlayed = false;
-    }
+   //public void ResetSoundPlayed()
+   // {
+   //     hasSoundPlayed = false;
+   // }
 
 
     protected virtual AudioClip PlayMeleeSounds()
     {
         for (int i = 0; i < MeleeSounds.Count; i++)
         {
-            if (animator.eventFunctionName == MeleeSounds[i].AudioGroup &&
-                animator.eventFired)
+            if (hasSoundPlayed)
             {
                 audioGroup = MeleeSounds[i].AudioGroup;
                 audioClip = MeleeSounds[i].Clips[Random.Range(0, MeleeSounds[i].Clips.Length)];
-                manager.MeleeSounds(audioClip);                
+                manager.MeleeSounds(audioClip);
+                hasSoundPlayed = false;
             }
             else
             {
                 audioClip = null;
+                hasSoundPlayed = false;
             }
 
         }
